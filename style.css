@@ -100,6 +100,7 @@ body{
     flex: 1.1;
     flex-direction: column;
 }
+
 .about-text p {
     margin-bottom: 1em;
 }
@@ -113,21 +114,16 @@ body{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 29.25rem;
-}
-
-.awards-image{
-    height: 36.875rem;
 }
 
 .content-image img {
-    max-height: 100%;
+    max-height: 30rem;
     max-width: 100%;
-    height: auto;
     width: auto;
-    display: block;
+    height: auto;
     border: 0.25rem solid #b7a99e;
     object-fit: contain;
+    display: block;
 }
 
 .content-text h1{
@@ -202,17 +198,38 @@ body{
     padding-bottom: 0;
 }
 
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #281f15;
+    transition: transform 0.3s ease;
+}
+
+.nav-toggle.open {
+    transform: rotate(90deg);
+}
+
+.nav-links li {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
 @media (max-width: 1200px) {
     .content, .menu {
-        width: 98%;
+        width: 95%;
         padding: 2.5rem;
         margin: 2.5rem auto;
     }
     .content-image {
-        height: 22rem;
+        align-items: flex-start;
     }
-    .awards-image {
-        height: 28rem;
+    .content-image img {
+        width: 14rem;
+        height: 14rem;
     }
     .content-text h1 {
         font-size: 2.5rem;
@@ -226,37 +243,9 @@ body{
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
     .content, .menu {
         width: 100%;
-        padding: 2rem;
-        margin: 1.5rem auto;
-    }
-    .content {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    .content-image,
-    .awards-image {
-        height: 18rem;
-        margin-bottom: 1rem;
-    }
-    .content-text h1 {
-        font-size: 2rem;
-    }
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    .nav-links li a {
-        font-size: 1.125rem;
-        margin-bottom: 0.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .content, .menu {
         padding: 1.5rem;
         margin: 1rem auto;
     }
@@ -264,51 +253,70 @@ body{
         flex-direction: column;
         gap: 1.5rem;
     }
-    .content-image,
-    .awards-image {
-        height: 13rem;
-        margin-bottom: 1rem;
+    .content-image {
+        align-items: flex-start;
+    }
+    .content-image img {
+        width: 10rem;
+        height: 10rem;
     }
     .content-text h1 {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
     .content-text p,
-    .nav-links li a,
     .contact-text ul li a {
         font-size: 1rem;
+        line-height: 1.5;
+    }
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+    .nav-toggle {
+        display: block;
     }
     .nav-links {
-        gap: 0.5rem;
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+        padding: 1rem 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    .nav-links.open {
+        max-height: 20rem;
+    }
+    .nav-links li {
+        opacity: 0;
+        transform: translateY(-0.5rem);
+    }
+    .nav-links.open li {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
 @media (max-width: 480px) {
     .content, .menu {
         padding: 1rem;
-        width: 100%;
         margin: 0.5rem auto;
     }
     .content {
-        flex-direction: column;
         gap: 1rem;
         border-width: 0.0625rem;
-        padding: 0.5rem;
     }
-    .content-image,
-    .awards-image {
+    .content-image {
         display: none;
     }
     .content-text h1 {
-        font-size: 1.125rem;
+        font-size: 1.5rem;
     }
     .content-text p,
-    .nav-links li a,
     .contact-text ul li a {
-        font-size: 0.875rem;
+        font-size: 1rem;
         line-height: 1.4;
-    }
-    .nav-links {
-        gap: 0.25rem;
     }
     .contact-text ul li {
         margin-bottom: 0.5rem;
