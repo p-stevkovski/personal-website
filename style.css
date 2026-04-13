@@ -72,10 +72,6 @@ body{
     color: #281f15 !important;
 }
 
-.nav-links li a.current:hover {
-    color: #281f15;
-}
-
 .nav-links li a.current::after {
     content: '';
     position: absolute;
