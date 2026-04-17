@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Petar Stevkovski – About</title>
+    <title>Petar Stevkovski</title>
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Personal website of Petar Stevkovski, CS student at FCSE." />
@@ -12,17 +12,18 @@
     <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
+
 <nav class="menu">
     <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     <ul class="nav-links">
-        <li><a class="current" href="index.html">About</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="awards.html">Awards</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#about" data-page="about" class="current">About</a></li>
+        <li><a href="#education" data-page="education">Education</a></li>
+        <li><a href="#awards" data-page="awards">Awards</a></li>
+        <li><a href="#contact" data-page="contact">Contact</a></li>
     </ul>
 </nav>
 
-<section class="content">
+<section class="content page" id="about">
     <div class="content-text about-text">
         <h1>Petar Stevkovski</h1>
         <p>I am a student at the Faculty of Computer Science and Engineering in Skopje, Macedonia, with a strong interest in technology, problem-solving, and innovation.</p>
@@ -34,6 +35,121 @@
         <img src="images/me.webp" alt="Petar Stevkovski" />
     </div>
 </section>
-<script src="script.js"></script>
+
+<section class="content page hidden" id="education">
+    <div class="content-text education-text">
+        <h1>Education</h1>
+
+        <div class="education-block">
+            <p class="year">2024 – Current</p>
+            <p>Bachelor of Science in Software Engineering and Information Technologies (240 ECTS), Faculty of Computer Science and Engineering</p>
+        </div>
+
+        <div class="education-block">
+            <p class="year">2020 – 2024</p>
+            <p>High School "Georgi Dimitrov", Skopje</p>
+            <p>Average grade: 4.97</p>
+        </div>
+
+        <div class="education-block">
+            <p class="year">2011 – 2020</p>
+            <p>Elementary School "Blazhe Koneski", Skopje</p>
+            <p>Average grade: 5.00</p>
+            <p>Certificate of praise for excellent success and behavior</p>
+        </div>
+    </div>
+</section>
+
+<section class="content page hidden" id="awards">
+    <div class="content-text education-text">
+        <h1>Awards</h1>
+
+        <div class="education-block">
+            <p class="year">2024</p>
+            <p>Second place in the RoboMac Junior 2024 competition in robotics, artificial intelligence, and electronics in the category autonomous mobile robotics.</p>
+        </div>
+
+        <div class="education-block">
+            <p class="year">2022</p>
+            <p>Second place in the regional English language competition for second-year high school students.</p>
+        </div>
+
+        <div class="education-block">
+            <p class="year">2018</p>
+            <p>Third place in Computer Technology at the 55th National Competition of Young Technicians and Natural Scientists of Macedonia.</p>
+        </div>
+    </div>
+</section>
+
+<section class="content page hidden" id="contact">
+    <div class="content-text contact-text">
+        <h1>Contact</h1>
+        <ul>
+            <li>
+                <img src="images/email.svg" alt="Email" class="contact-icon">
+                <a href="mailto:petar.stevkovski@students.finki.ukim.mk">petar.stevkovski@students.finki.ukim.mk</a>
+            </li>
+            <li>
+                <img src="images/github.svg" alt="GitHub" class="contact-icon">
+                <a href="https://github.com/p-stevkovski" target="_blank">p-stevkovski</a>
+            </li>
+            <li>
+                <img src="images/linkedin.svg" alt="LinkedIn" class="contact-icon">
+                <a href="https://www.linkedin.com/in/petar-stevkovski-819b53302/" target="_blank">Petar Stevkovski</a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const pages = document.querySelectorAll('.page');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+
+    toggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        toggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+
+    function showPage(id) {
+        pages.forEach(p => p.classList.add('hidden'));
+        const target = document.getElementById(id);
+        if (target) target.classList.remove('hidden');
+
+        navAnchors.forEach(a => {
+            a.classList.toggle('current', a.dataset.page === id);
+        });
+
+        const titles = {
+            about: 'Petar Stevkovski – About',
+            education: 'Petar Stevkovski – Education',
+            awards: 'Petar Stevkovski – Awards',
+            contact: 'Petar Stevkovski – Contact'
+        };
+        document.title = titles[id] || 'Petar Stevkovski';
+
+        history.pushState(null, '', '#' + id);
+
+        navLinks.classList.remove('open');
+        toggle.textContent = '☰';
+    }
+
+    navAnchors.forEach(a => {
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(a.dataset.page);
+        });
+    });
+
+    window.addEventListener('popstate', () => {
+        const id = location.hash.replace('#', '') || 'about';
+        showPage(id);
+    });
+
+    const initialPage = location.hash.replace('#', '') || 'about';
+    showPage(initialPage);
+</script>
+
 </body>
 </html>
