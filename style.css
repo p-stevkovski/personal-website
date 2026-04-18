@@ -333,7 +333,7 @@ body{
         display: block;
         float: right;
         width: 7rem;
-        border: 0.25rem solid #b7a99e;
+        border: 0.125rem solid #b7a99e;
         margin-left: 0.75rem;
         margin-bottom: 0.5rem;
     }
